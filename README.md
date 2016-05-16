@@ -1,0 +1,2 @@
+# Hera
+Hera is a slow denial of service tool that exploits the fact that some web servers will dump files to disk by default as they are being uploaded (sometimes even if the hosted application has not implemented file upload). This makes it possible to use up disk space and sometimes RAM/Swap. Different servers will respond differently to this but in many cases it leads to instability and/or crash of the system.
