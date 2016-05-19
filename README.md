@@ -13,11 +13,12 @@ g++ -std=c++11 -pthread main.cpp -o hera -lz
 ```
 ###### Increasing file descriptor limit
 vim /etc/security/limits.conf
-
+```
 * soft nofile 65000
 * hard nofile 65000
 root soft nofile 65000
 root hard nofile 65000
+```
 
 Restart or relog.
 ###### Test case 1
