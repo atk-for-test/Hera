@@ -317,15 +317,19 @@ string buildPayload(string host, string path, float fileSize, int numFiles, bool
     if(gzip)
     {
         payload << "Content-Encoding: gzip\r\n";
+        payload << "Content-Type: multipart/form-data; boundary=---------------------------424199281147285211419178285\r\n";
+        payload << "Content-Length: " << std::to_string(compress_gzip(body.str(), 9).size()+extraContent) << "\r\n\r\n";
     }
-
-	payload << "Content-Type: multipart/form-data; boundary=---------------------------424199281147285211419178285\r\n";
-	payload << "Content-Length: " << std::to_string(compress_gzip(body.str(), 9).size()+extraContent) << "\r\n\r\n";
+    else
+    {
+        payload << "Content-Type: multipart/form-data; boundary=---------------------------424199281147285211419178285\r\n";
+        payload << "Content-Length: " << body.str().size()+extraContent << "\r\n\r\n";
+    }
 
     //Compress if gzip selected. Add \r\n at end here since we don't want to gzip that part
     if(gzip)
     {
-	   payload << compress_gzip(body.str(), 9) << "\r\n";
+        payload << compress_gzip(body.str(), 9) << "\r\n";
     }
     else
     {
