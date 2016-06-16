@@ -48,6 +48,8 @@ root hard nofile 65000
 
 */
 
+// Found gzip code here first http://blog.cppse.nl/deflate-and-gzip-compress-and-decompress-functions
+// Original work is from link below
 // Found this one here: http://panthema.net/2007/0328-ZLibString.html, author is Timo Bingmann
 // edited version
 /** Compress a STL string using zlib with given compression level and return
