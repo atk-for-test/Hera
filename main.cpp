@@ -344,7 +344,7 @@ string buildPayload(string host, string path, float fileSize, int numFiles, bool
 void help()
 {
     string help = 
-    "./hera host port threads connections path filesize files endfile gzip\n\n"
+    "./hera host port threads connections path filesize files endfile gzip timeout\n\n"
     "host\t\tHost to attack\n"
     "port\t\tPort to connect to\n"
     "threads\t\tNumber of threads to start\n"
